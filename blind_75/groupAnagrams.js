@@ -1,4 +1,6 @@
-// Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+// Given an array of strings strs
+// group the anagrams together.
+// You can return the answer in any order.
 const assert = require("assert");
 
 const isAnagram = function (s, t) {
@@ -38,25 +40,60 @@ const groupAnagrams = function (strs) {
 /**
  * @param {string[]} strs
  * @return {string[][]}
+ * O(nwlogw): time complexity
  */
-const groupAnagrams2 = function (strs) {
-  const hashMap = new Map(); // mapping charCount to list of anagrams
-
-  for (const str of strs) {
-    const counts = new Map();
-    for (const ch of str) {
-      const count = counts.get(ch) ?? 0;
-      counts.set(ch, count + 1);
+function groupAnagrams2(strs) {
+  if (!strs.length) return [];
+  let cache = new Map();
+  for (let str of strs) {
+    let key = createKey(str);
+    if (cache.has(key)) {
+      cache.get(key).push(str);
+    } else {
+      cache.set(key, [str]);
     }
-    const anagrams = hashMap.get(counts) ?? 0;
-    console.log({counts})
-    hashMap.set(counts, anagrams ? [str, ...anagrams] : [str]);
   }
-  return hashMap;
-};
+  return Array.from(cache.values());
+
+  function createKey(str) {
+    const frequency = new Array(26).fill(0);
+    const alphabet = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ];
+    for (const char of str) {
+      const code = alphabet.indexOf(char) + 1;
+      frequency[code]++;
+    }
+    return frequency.toString();
+  }
+}
 
 const input1 = ["eat", "tea", "tan", "ate", "nat", "bat"];
-// const answer1 = [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]];
-// assert.deepEqual(groupAnagrams(input1), answer1);
+const answer1 = [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]];
 
 console.log(groupAnagrams2(input1));
