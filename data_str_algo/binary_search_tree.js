@@ -130,14 +130,14 @@ class BST {
       return null;
     } else {
       const result = new Array();
-      this.#traverse_in_order(this.root, result);
+      this.#traverseInOrder(this.root, result);
       return result;
     }
   }
-  #traverse_in_order(node, result) {
-    node.left && this.#traverse_in_order(node.left, result);
+  #traverseInOrder(node, result) {
+    node.left && this.#traverseInOrder(node.left, result);
     result.push(node.data);
-    node.right && this.#traverse_in_order(node.right, result);
+    node.right && this.#traverseInOrder(node.right, result);
   }
   preOrder() {
     if (this.root === null) {

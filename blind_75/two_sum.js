@@ -17,7 +17,7 @@ const twoSum = function (nums, target) {
 /**
  * @param {number[]} nums
  * @param {number} target
- * @return {number[]}
+ * @return {number[] | null}
  */
 const twoSum2 = function (nums, target) {
   const hashMap = new Map();
@@ -28,6 +28,7 @@ const twoSum2 = function (nums, target) {
     }
     hashMap.set(nums[i], i);
   }
+  return [];
 };
 
 const example1 = [2, 7, 11, 15];
