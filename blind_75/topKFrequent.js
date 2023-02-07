@@ -16,10 +16,31 @@ function topKFrequent(nums, k) {
   }
 
   let sortedArr = Array.from(
-    new Map([...map.entries()].sort((a, b) => a - b)).keys()
+    new Map([...map.entries()].sort((a, b) => b[1] - a[1])).keys()
   );
 
   return sortedArr.slice(0, k);
+}
+
+function topKFrequent2(nums, k) {
+  let map = new Map();
+  const bucket = [];
+  const result = [];
+
+  for (let num of nums) {
+    map.set(num, (map.get(num) ?? 0) + 1);
+  }
+
+  for (let [num, freq] of map) {
+    bucket[freq] = (bucket[freq] || new Set()).add(num);
+  }
+
+  for (let i = bucket.length - 1; i >= 0; i--) {
+    if (bucket[i]) result.push(...bucket[i]);
+    if (result.length === k) break;
+  }
+
+  return result;
 }
 
 /**
@@ -28,19 +49,28 @@ function topKFrequent(nums, k) {
  * @return {number[]}
  */
 function topKFrequent1(nums, k) {
-  let map = new Map();
+  let freqMap = new Map();
+  const bucket = [];
+  const result = [];
 
   for (let num of nums) {
-    map.set(num, (map.get(num) ?? 0) + 1);
+    freqMap.set(num, (freqMap.get(num) ?? 0) + 1);
   }
 
-  const frequency = new Array();
-  for (let [num, count] of map.entries()) {
-    frequency[count] = num;
+  for (let [num, freq] of freqMap) {
+    bucket[freq] = (bucket[freq] || new Set()).add(num);
   }
 
-  return frequency.slice(frequency.length - k, frequency.length);
+  for (let i = bucket.length - 1; i >= 0; i--) {
+    if (bucket[i]) result.push(...bucket[i]);
+    if (result.length === k) break;
+  }
+
+  return result;
 }
+
+topKFrequent2([3, 0, 1, 0], 2);
+// assert.deepEqual(topKFrequent([3, 0, 1, 0], 1), [0]);
 // // return the 2 most frequent nums
 // assert.deepEqual(topKFrequent([1, 1, 1, 2, 2, 3], 2), [1, 2]);
 // assert.deepEqual(topKFrequent([1], 1), [1]);
