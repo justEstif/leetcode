@@ -1,1 +1,1 @@
-# [NeetCode](https://neetcode.io/)
+practice questions from leetcode, project euler, others
