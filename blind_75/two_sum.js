@@ -22,7 +22,7 @@ const twoSum = function (nums, target) {
 const twoSum2 = function (nums, target) {
   const hashMap = new Map();
   for (let i = 0; i < nums.length; i++) {
-    let difference = target - nums[i];
+    const difference = target - nums[i];
     if (hashMap.has(difference)) {
       return [hashMap.get(difference), i];
     }

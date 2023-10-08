@@ -15,14 +15,6 @@ def is_palindrome(s)
   true
 end
 
-# split, trim, reverse, compare
-
-# @param {String} c
-# @return {Boolean}
-def alphanumeric?(c)
-  c =~ /[[:alnum:]]/
-end
-
 puts is_palindrome('A man, a plan, a canal: Panama') # true
 puts is_palindrome('race a car') # false
 puts is_palindrome(' ') # true
