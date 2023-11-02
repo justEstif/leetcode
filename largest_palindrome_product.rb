@@ -6,7 +6,7 @@
 # @return {Integer}
 def largest_palindrome_product(n)
   max = ('9' * n).to_i
-  min = (max + 1) / 10
+  min = (max + 1) / 10 # smallest n digit number
   largest = -1
 
   max.downto(min) do |i|

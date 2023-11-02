@@ -5,10 +5,9 @@ def addbinary(a, b)
   # change a to binary
   # change b to binary
   # add the two and change that to binary
-  res = ''
+  res = ""
   carry = 0
-
 end
 
-puts add_binary('11', '1') # "100"
-puts add_binary('1010', '1011') # "1011"
+puts add_binary("11", "1") # "100"
+puts add_binary("1010", "1011") # "1011"
